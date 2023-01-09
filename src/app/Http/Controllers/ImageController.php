@@ -23,7 +23,7 @@ class ImageController extends Controller
             // dd(basename($path));
 
             //        Или ткут паблик делать, или в конфигах s3 добавить 'visibility' => 'public', или на самом aws
-            // Storage::disk('s3')->setVisibility($path, 'public');
+            Storage::disk('s3')->setVisibility($path, 'public');
 
             // $image = Image::create([
             //     'project_id' => $token,
