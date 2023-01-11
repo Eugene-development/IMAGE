@@ -1,0 +1,40 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+#    image: php:7.3-fpm
+    container_name: "${COMPOSE_PROJECT_NAME}_PHP"
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - boss-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: "${COMPOSE_PROJECT_NAME}_NGINX"
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "7741:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - boss-network
+
+#Docker Networks
+networks:
+  boss-network:
+    driver: bridge
