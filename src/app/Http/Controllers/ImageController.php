@@ -18,7 +18,7 @@ class ImageController extends Controller
 
 
         if ($token == '1' || $token == '4') {
-            $path = $request->file('image')->store('team', 's3');
+            $path = $request->file('image')->store('images', 's3');
 
             // dd(basename($path));
 
