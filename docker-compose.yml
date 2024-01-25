@@ -1,12 +1,11 @@
-version: '3'
+version: "3"
 services:
-
   #PHP Service
   app:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
-#    image: php:7.3-fpm
+    #    image: php:7.3-fpm
     container_name: "${COMPOSE_PROJECT_NAME}_PHP"
     restart: unless-stopped
     tty: true
@@ -27,7 +26,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "7741:80"
+      - "7746:80"
     volumes:
       - ./:/var/www
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
