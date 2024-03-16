@@ -17,46 +17,18 @@ class ImageController extends Controller
         // Назначение пути до целевой папки в бакете, в соответствии с именем бакета
         $path = $request->file('image')->store($projectHeaderValue, 'yandex');
 
+        // Запись в бакет с публичными правами
         Storage::disk('yandex')->setVisibility($path, 'public');
 
+        // Возврат хэша файла для записи в БД
         return basename($path);
     }
 
 
-    // public function store(Request $request)
+    // public function delete(Request $request, $param)
     // {
-
-    //     $file = $request->file('image');
-    //     $projectHeaderValue = $request->header('Project');
-
-    //     $filePath = $file->getClientOriginalName();
-    //     // dd($filePath);
-    //     // Использование диска 'yandex'
-    //     Storage::disk('yandex')->put($filePath, file_get_contents($file));
-
-
-
-    //     return basename($filePath);
+    //     Image::where('project_id', $request->bearerToken())
+    //         ->where('tagable_id', $param)
+    //         ->delete();
     // }
-
-    // public function store(Request $request)
-    // {
-
-    //     $projectHeaderValue = $request->header('Project');
-
-    //     if ($projectHeaderValue === 'zov') {
-    //         $path = $request->file('image')->store('zov', 's3');
-    //     }
-
-    //     Storage::disk('s3')->setVisibility($path, 'public');
-
-    //     return basename($path);
-    // }
-
-    public function delete(Request $request, $param)
-    {
-        Image::where('project_id', $request->bearerToken())
-            ->where('tagable_id', $param)
-            ->delete();
-    }
 }
