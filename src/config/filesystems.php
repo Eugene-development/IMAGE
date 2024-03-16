@@ -39,7 +39,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
@@ -54,6 +54,16 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
+        ],
+
+        'yandex' => [
+            'driver' => 's3',
+            'key' => env('YANDEX_CLOUD_KEY'),
+            'secret' => env('YANDEX_CLOUD_SECRET'),
+            'region' => env('YANDEX_CLOUD_REGION'),
+            'bucket' => env('YANDEX_CLOUD_BUCKET'),
+            'url' => env('YANDEX_CLOUD_URL'),
+            'endpoint' => env('YANDEX_CLOUD_ENDPOINT'),
         ],
 
     ],
