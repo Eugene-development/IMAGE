@@ -11,11 +11,11 @@ class ImageController extends Controller
     public function store(Request $request)
     {
 
+        // Определение проекта из заголовка
         $projectHeaderValue = $request->header('Project');
 
-        if ($projectHeaderValue === 'zov') {
-            $path = $request->file('image')->store('test', 'yandex');
-        }
+        // Назначение пути до целевой папки в бакете, в соответствии с именем бакета
+        $path = $request->file('image')->store($projectHeaderValue, 'yandex');
 
         Storage::disk('yandex')->setVisibility($path, 'public');
 
